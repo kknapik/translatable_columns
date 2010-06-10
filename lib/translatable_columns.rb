@@ -91,10 +91,11 @@ module TranslatableColumns
     # default column if no column is found for this locale.
     def define_translated_setter(column)
       define_method :"#{column}=" do |value|
-        column_translated = self.class.column_translated(column).to_s
-        self.send(:"#{column_translated}=", value)
-        if @changed_attributes.has_key?(column_translated)
-          @changed_attributes[column.to_s] = @changed_attributes[column_translated]
+        current_column = self.class.column_translated(column).to_s
+        default_column = self.class.column_name_localized(column, I18n.default_locale).to_s
+        self.send(:"#{current_column}=", value)
+        if @changed_attributes.has_key?(current_column) && current_column == default_column
+          @changed_attributes[column.to_s] = @changed_attributes[current_column]
         end
       end
     end
