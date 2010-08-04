@@ -71,9 +71,13 @@ module TranslatableColumns
     # If a column doesn't exist, it'll default to the I18n.default_locale.
     def define_translated_getter_with_defaults(column)
       define_method column do
-        self.send(self.class.column_translated(column)) or 
-        self.send(self.class.column_name_localized(column, I18n.default_locale)) or
-        self.find_translated_value_for(column)
+        val = self.send(self.class.column_translated(column))
+        return val unless val.blank?
+
+        val = self.send(self.class.column_name_localized(column, I18n.default_locale))
+        return val unless val.blank?
+
+        return self.find_translated_value_for(column)
       end
     end
 
