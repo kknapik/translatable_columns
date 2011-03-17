@@ -176,3 +176,6 @@ module TranslatableColumns
   end
 
 end
+
+
+ActiveRecord::Base.class_eval { include TranslatableColumns }
