@@ -1,5 +1,10 @@
 module TranslatableColumns
 
+  def self.included(base)
+    base.send :extend,  ClassMethods
+    base.send :include, InstanceMethods
+  end
+
   # A config class for TranslatableColumns
   # Stores configuration options, so global settings can be changed.
   # These options are available:

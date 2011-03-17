@@ -1,2 +1,3 @@
-ActiveRecord::Base.extend TranslatableColumns::ClassMethods
-ActiveRecord::Base.send :include, TranslatableColumns::InstanceMethods
+require 'translatable_columns'
+
+ActiveRecord::Base.class_eval { include TranslatableColumns }
