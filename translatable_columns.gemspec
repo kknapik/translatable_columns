@@ -1,6 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = "translatable_columns"
   s.version     = "0.0.1"
+  s.authors     = ['iain','knapo']
   s.platform    = Gem::Platform::RUBY
   s.rubyforge_project = "knapo-translatable_columns"
 
